@@ -12,6 +12,18 @@ The most instersting topic in my learning experience is ASTR 333, a course about
 
 I became interested in data science because it combines programming, statistics, and real-world problem solving. I hope to develop stronger skills in machine learning, statistical analysis, and data visualization throughout the MDS program.
 
-## Outside Data Science
+## Outside the Data Science
 
-Outside of school, I enjoy making scaled models, watching movies, and any other stuff!
+Outside of school, I enjoy making handiwork like scaled models, knitting(actual one, not one in the RStudio!), and any other stuff too!
+
+![](images/1.jpg)
+
+Making Military Models makes me feel focued on details and have fun.
+
+![](images/2.jpg)
+
+Taking course named "Visual Arts for Classroom Practice: Textile Design(EDCP404)" gave me a fresh experience in handiwork.
+
+![](images/3.jpg)
+
+Also, making Gunpla is also have a lot of fun!
