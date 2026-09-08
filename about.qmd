@@ -2,4 +2,16 @@
 title: "About"
 ---
 
-About this site
+## Background
+
+Just like I mentioned in the main page, I studied for my Bachelor's degree at UBC, My previous studies included computer science and science-related subjects, which led me to become interested in analyzing data and solving computational problems.
+
+The most instersting topic in my learning experience is ASTR 333, a course about Astrobiology, which combines Earth Science and Astrnomy, with adding the computer techniques, it's just exactly what I want to dive into! So tha's why I was so fascinated about this topic, and I recommend this course to everyone who is insterested in this related topic.
+
+## Why Data Science
+
+I became interested in data science because it combines programming, statistics, and real-world problem solving. I hope to develop stronger skills in machine learning, statistical analysis, and data visualization throughout the MDS program.
+
+## Outside Data Science
+
+Outside of school, I enjoy making scaled models, watching movies, and any other stuff!
