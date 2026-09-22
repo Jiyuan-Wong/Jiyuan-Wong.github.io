@@ -12,6 +12,7 @@ Data: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), Palmer 
 ## Load the data
 
 ```{r}
+#| echo: true
 #| message: false
 #| warning: false
 
@@ -24,6 +25,7 @@ penguins |> head()
 ## Average body mass by species
 
 ```{r}
+#| echo: true
 penguins |>
   drop_na(species, body_mass_g) |>
   group_by(species) |>
@@ -38,6 +40,7 @@ Gentoo penguins have the largest average body mass among the three species in th
 ## Body mass distribution by species
 
 ```{r}
+#| echo: true
 #| label: fig-body-mass-species
 #| fig-cap: "Distribution of body mass for each penguin species."
 

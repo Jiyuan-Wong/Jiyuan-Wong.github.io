@@ -102,6 +102,6 @@
     "href": "posts/iris-python/index.html#load-the-data",
     "title": "Exploring the Iris Dataset using Python",
     "section": "Load the data",
-    "text": "Load the data\n\nfrom sklearn.datasets import load_iris\nimport pandas as pd\n\niris = load_iris(as_frame=True)\ndf = iris.frame\n\ndf.head()\n\n\n\n\n\n\n\n\nsepal length (cm)\nsepal width (cm)\npetal length (cm)\npetal width (cm)\ntarget\n\n\n\n\n0\n5.1\n3.5\n1.4\n0.2\n0\n\n\n1\n4.9\n3.0\n1.4\n0.2\n0\n\n\n2\n4.7\n3.2\n1.3\n0.2\n0\n\n\n3\n4.6\n3.1\n1.5\n0.2\n0\n\n\n4\n5.0\n3.6\n1.4\n0.2\n0"
+    "text": "Load the data\n\nfrom sklearn.datasets import load_iris\nimport pandas as pd\n\niris = load_iris(as_frame=True)\ndf = iris.frame\n\ndf.head()\n\n\n\n\n\n\n\n\nsepal length (cm)\nsepal width (cm)\npetal length (cm)\npetal width (cm)\ntarget\n\n\n\n\n0\n5.1\n3.5\n1.4\n0.2\n0\n\n\n1\n4.9\n3.0\n1.4\n0.2\n0\n\n\n2\n4.7\n3.2\n1.3\n0.2\n0\n\n\n3\n4.6\n3.1\n1.5\n0.2\n0\n\n\n4\n5.0\n3.6\n1.4\n0.2\n0\n\n\n\n\n\n\n\n\ndf.groupby(\"target\").mean()\n\n\n\n\n\n\n\n\nsepal length (cm)\nsepal width (cm)\npetal length (cm)\npetal width (cm)\n\n\ntarget\n\n\n\n\n\n\n\n\n0\n5.006\n3.428\n1.462\n0.246\n\n\n1\n5.936\n2.770\n4.260\n1.326\n\n\n2\n6.588\n2.974\n5.552\n2.026\n\n\n\n\n\n\n\n\n#| label: fig-iris-scatter\n#| fig-cap: \"Relationship between sepal length and petal length.\"\n\nimport matplotlib.pyplot as plt\n\nplt.scatter(\n    df[\"sepal length (cm)\"],\n    df[\"petal length (cm)\"]\n)\n\nplt.xlabel(\"Sepal length (cm)\")\nplt.ylabel(\"Petal length (cm)\")\nplt.show()"
   }
 ]

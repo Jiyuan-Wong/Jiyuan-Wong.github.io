@@ -7,6 +7,8 @@ date: "2026-09-22"
 ## Check Python environment
 
 ```{python}
+#| echo: true
+
 import sys
 print(sys.executable)
 ```
@@ -14,6 +16,8 @@ print(sys.executable)
 ## Load the data
 
 ```{python}
+#| echo: true
+
 from sklearn.datasets import load_iris
 import pandas as pd
 
@@ -21,4 +25,28 @@ iris = load_iris(as_frame=True)
 df = iris.frame
 
 df.head()
+```
+
+```{python}
+#| echo: true
+
+df.groupby("target").mean()
+```
+
+```{python}
+#| echo: true
+
+#| label: fig-iris-scatter
+#| fig-cap: "Relationship between sepal length and petal length."
+
+import matplotlib.pyplot as plt
+
+plt.scatter(
+    df["sepal length (cm)"],
+    df["petal length (cm)"]
+)
+
+plt.xlabel("Sepal length (cm)")
+plt.ylabel("Petal length (cm)")
+plt.show()
 ```
