@@ -4,15 +4,6 @@ author: "Jiyuan Wang"
 date: "2026-09-22"
 ---
 
-## Check Python environment
-
-```{python}
-#| echo: true
-
-import sys
-print(sys.executable)
-```
-
 ## Load the data
 
 ```{python}

@@ -209,10 +209,10 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1790060400000" data-listing-file-modified-sort="1790116561145" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="52">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1790060400000" data-listing-file-modified-sort="1790119272237" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="46">
 <div class="thumbnail"><a href="./posts/iris-python/index.html" class="no-external">
 
-<p class="card-img-top"><img loading='lazy' src="posts\iris-python\index_files\figure-html\cell-5-output-1.png"  class="thumbnail-image card-img"/></p>
+<p class="card-img-top"><img loading='lazy' src="posts\iris-python\index_files\figure-html\cell-4-output-1.png"  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
@@ -222,14 +222,25 @@ window.Quarto = {
 <div class="delink listing-description"><a href="./posts/iris-python/index.html" class="no-external">
 
 
-<div id="9bbd4eae" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im">import</span> sys</span>
-<span id="cb1-2"><span class="bu">print</span>(sys.executable)</span></code></pre></div></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>C:\Users\HUAWEI\mds\521\Jiyuan-Wong.github.io\.venv\Scripts\python.exe</code></pre>
-</div>
-</div>
+<div id="0a38babc" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_iris</span>
+<span id="cb1-2"><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">iris <span class="op">=</span> load_iris(as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-5">df <span class="op">=</span> iris.frame</span>
+<span id="cb1-6"></span>
+<span id="cb1-7">df.head()</span></code></pre></div></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
 
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sepal length (cm)</th>
+<th data-quarto-table-cell-role="th">sepal width (cm)</th>
+<th data-quarto-table-cell-role="th">petal…</th><th data-quarto-table-cell-role="th"></th><th data-quarto-table-cell-role="th"></th></tr></thead><tbody><tr class="odd"><th data-quarto-table-cell-role="th"></th><td></td><td></td><td></td><td></td><td></td></tr><tr class="even"><th data-quarto-table-cell-role="th"></th><td></td><td></td><td></td><td></td><td></td></tr><tr class="odd"><th data-quarto-table-cell-role="th"></th><td></td><td></td><td></td><td></td><td></td></tr><tr class="even"><th data-quarto-table-cell-role="th"></th><td></td><td></td><td></td><td></td><td></td></tr><tr class="odd"><th data-quarto-table-cell-role="th"></th><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div></div><div id="e1199817" class="cell" data-execution_count="2"><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="st"></span></span></code></pre></div></div><div class="cell-output cell-output-display" data-execution_count="2"><div><table class="dataframe caption-top table table-sm table-striped small" data-border="1"><thead><tr class="header"><th data-quarto-table-cell-role="th"></th><th data-quarto-table-cell-role="th"></th><th data-quarto-table-cell-role="th"></th><th data-quarto-table-cell-role="th"></th><th data-quarto-table-cell-role="th"></th></tr><tr class="even"><th data-quarto-table-cell-role="th"></th><th data-quarto-table-cell-role="th"></th><th data-quarto-table-cell-role="th"></th><th data-quarto-table-cell-role="th"></th><th data-quarto-table-cell-role="th"></th></tr></thead><tbody><tr class="odd"><th data-quarto-table-cell-role="th"></th><td></td><td></td><td></td><td></td></tr><tr class="even"><th data-quarto-table-cell-role="th"></th><td></td><td></td><td></td><td></td></tr><tr class="odd"><th data-quarto-table-cell-role="th"></th><td></td><td></td><td></td><td></td></tr></tbody></table></div></div></div><div id="6786987f" class="cell" data-execution_count="3"><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"></span><span id="cb3-4"><span class="im"></span><span class="im"></span></span><span id="cb3-5"></span><span id="cb3-6"></span><span id="cb3-7"><span class="st"></span></span><span id="cb3-8"><span class="st"></span></span><span id="cb3-9"></span><span id="cb3-10"></span><span id="cb3-11"><span class="st"></span></span><span id="cb3-12"><span class="st"></span></span><span id="cb3-13"></span></code></pre></div></div><div class="cell-output cell-output-display"><div><figure class="figure"><p></p></figure></div></div></div>
 </a></div>
 </div>
 <div class="metadata">
@@ -243,7 +254,7 @@ Jiyuan Wang
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1790060400000" data-listing-file-modified-sort="1790116604653" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="141">
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1790060400000" data-listing-file-modified-sort="1790117361485" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="141">
 <div class="thumbnail"><a href="./posts/penguins-r/index.html" class="no-external">
 
 <p class="card-img-top"><img loading='lazy' src="posts\penguins-r\index_files\figure-html\fig-body-mass-species-1.png"  class="thumbnail-image card-img"/></p>
