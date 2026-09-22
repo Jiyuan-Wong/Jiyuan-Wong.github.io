@@ -3,8 +3,8 @@
     "listing": "/blog.html",
     "items": [
       "/posts/iris-python/index.html",
-      "/posts/first-week/index.html",
-      "/posts/penguins-r/index.html"
+      "/posts/penguins-r/index.html",
+      "/posts/first-week/index.html"
     ]
   }
 ]

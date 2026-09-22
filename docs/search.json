@@ -2,9 +2,37 @@
   {
     "objectID": "posts/penguins-r/index.html",
     "href": "posts/penguins-r/index.html",
-    "title": "First Week in MDS",
+    "title": "Exploring Palmer Penguins using R",
     "section": "",
-    "text": "Sadly, due to the schedule conflicts, I wasn’t able to attend the orientation activity, but I got to know the big pocture of the whole program little by little though the posts that uploaded in the program github page.\nJust like the information I got in social media/peers, this program is indeed accelerated and fast-pace, we need to accomplish four courses within one months, and remaining this pace for the next 8 months, the tasks are challenging, but worth doing it!\nSince this is a program for different background, I met lot of people in different major and campus before, it’s quite a precious expereince to me!\nOne thing that surprised me was how many multiple skills and learning objectives in addition to programming and statistics. Learning how to use Git, GitHub, the command line, and reproducible workflows has been challenging, but I can already see why these skills are important.\n\n\n\nFirst day of Program! A lot to learn lol\n\n\nOverall, I am enjoying the program and becoming more comfortable with the fast pace. I am looking forward to improving both my technical skills and my ability to solve real-world data science problems."
+    "text": "Data: Palmer Penguins, Palmer Station Antarctica LTER."
+  },
+  {
+    "objectID": "posts/penguins-r/index.html#data",
+    "href": "posts/penguins-r/index.html#data",
+    "title": "Exploring Palmer Penguins using R",
+    "section": "",
+    "text": "Data: Palmer Penguins, Palmer Station Antarctica LTER."
+  },
+  {
+    "objectID": "posts/penguins-r/index.html#load-the-data",
+    "href": "posts/penguins-r/index.html#load-the-data",
+    "title": "Exploring Palmer Penguins using R",
+    "section": "Load the data",
+    "text": "Load the data\n\nlibrary(tidyverse)\nlibrary(palmerpenguins)\n\npenguins |&gt; head()\n\n# A tibble: 6 × 8\n  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n1 Adelie  Torgersen           39.1          18.7               181        3750\n2 Adelie  Torgersen           39.5          17.4               186        3800\n3 Adelie  Torgersen           40.3          18                 195        3250\n4 Adelie  Torgersen           NA            NA                  NA          NA\n5 Adelie  Torgersen           36.7          19.3               193        3450\n6 Adelie  Torgersen           39.3          20.6               190        3650\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;"
+  },
+  {
+    "objectID": "posts/penguins-r/index.html#average-body-mass-by-species",
+    "href": "posts/penguins-r/index.html#average-body-mass-by-species",
+    "title": "Exploring Palmer Penguins using R",
+    "section": "Average body mass by species",
+    "text": "Average body mass by species\n\npenguins |&gt;\n  drop_na(species, body_mass_g) |&gt;\n  group_by(species) |&gt;\n  summarise(\n    mean_body_mass = mean(body_mass_g),\n    n = n()\n  )\n\n# A tibble: 3 × 3\n  species   mean_body_mass     n\n  &lt;fct&gt;              &lt;dbl&gt; &lt;int&gt;\n1 Adelie             3701.   151\n2 Chinstrap          3733.    68\n3 Gentoo             5076.   123\n\n\nGentoo penguins have the largest average body mass among the three species in this dataset."
+  },
+  {
+    "objectID": "posts/penguins-r/index.html#body-mass-distribution-by-species",
+    "href": "posts/penguins-r/index.html#body-mass-distribution-by-species",
+    "title": "Exploring Palmer Penguins using R",
+    "section": "Body mass distribution by species",
+    "text": "Body mass distribution by species\n\npenguins |&gt;\n  drop_na(species, body_mass_g) |&gt;\n  ggplot(aes(x = species, y = body_mass_g)) +\n  geom_boxplot() +\n  labs(\n    x = \"Species\",\n    y = \"Body mass (g)\",\n    title = \"Penguin Body Mass by Species\"\n  )\n\n\n\n\n\n\n\nFigure 1: Distribution of body mass for each penguin species.\n\n\n\n\n\nThe boxplot shows that Gentoo penguins generally have a higher body mass than Adelie and Chinstrap penguins."
   },
   {
     "objectID": "posts/first-week/index.html",
@@ -18,7 +46,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Exploring the Iris Dataset using Python\n\n\n\n\n\n\n\n\nSep 22, 2026\n\n\nJiyuan Wang\n\n\n\n\n\n\n\n\n\n\n\n\nFirst Week in MDS\n\n\n\n\n\n\n\n\nSep 8, 2026\n\n\nJiyuan Wang\n\n\n\n\n\n\n\n\n\n\n\n\nFirst Week in MDS\n\n\n\n\n\n\n\n\nSep 8, 2026\n\n\nJiyuan Wang\n\n\n\n\n\nNo matching items"
+    "text": "Exploring the Iris Dataset using Python\n\n\n\n\n\n\n\n\nSep 22, 2026\n\n\nJiyuan Wang\n\n\n\n\n\n\n\n\n\n\n\n\nExploring Palmer Penguins using R\n\n\nAn exploration of penguin body mass across species using R.\n\n\n\n\n\nSep 22, 2026\n\n\nJiyuan Wang\n\n\n\n\n\n\n\n\n\n\n\n\nFirst Week in MDS\n\n\n\n\n\n\n\n\nSep 8, 2026\n\n\nJiyuan Wang\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",

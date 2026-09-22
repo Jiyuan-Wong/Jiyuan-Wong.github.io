@@ -1,17 +1,55 @@
 ---
-title: "First Week in MDS"
+title: "Exploring Palmer Penguins using R"
 author: "Jiyuan Wang"
-date: 2026-09-08
+date: "2026-09-22"
+description: "An exploration of penguin body mass across species using R."
 ---
 
-Sadly, due to the schedule conflicts, I wasn't able to attend the orientation activity, but I got to know the big pocture of the whole program little by little though the posts that uploaded in the program github page.
+## Data
 
-Just like the information I got in social media/peers, this program is indeed accelerated and fast-pace, we need to accomplish four courses within one months, and remaining this pace for the next 8 months, the tasks are challenging, but worth doing it!
+Data: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), Palmer Station Antarctica LTER.
 
-Since this is a program for different background, I met lot of people in different major and campus before, it's quite a precious expereince to me!
+## Load the data
 
-One thing that surprised me was how many multiple skills and learning objectives in addition to programming and statistics. Learning how to use Git, GitHub, the command line, and reproducible workflows has been challenging, but I can already see why these skills are important.
+```{r}
+#| message: false
+#| warning: false
 
-![First day of Program! A lot to learn lol](first_day.jpg)
+library(tidyverse)
+library(palmerpenguins)
 
-Overall, I am enjoying the program and becoming more comfortable with the fast pace. I am looking forward to improving both my technical skills and my ability to solve real-world data science problems.
+penguins |> head()
+```
+
+## Average body mass by species
+
+```{r}
+penguins |>
+  drop_na(species, body_mass_g) |>
+  group_by(species) |>
+  summarise(
+    mean_body_mass = mean(body_mass_g),
+    n = n()
+  )
+```
+
+Gentoo penguins have the largest average body mass among the three species in this dataset.
+
+## Body mass distribution by species
+
+```{r}
+#| label: fig-body-mass-species
+#| fig-cap: "Distribution of body mass for each penguin species."
+
+penguins |>
+  drop_na(species, body_mass_g) |>
+  ggplot(aes(x = species, y = body_mass_g)) +
+  geom_boxplot() +
+  labs(
+    x = "Species",
+    y = "Body mass (g)",
+    title = "Penguin Body Mass by Species"
+  )
+```
+
+The boxplot shows that Gentoo penguins generally have a higher body mass than Adelie and Chinstrap penguins.
