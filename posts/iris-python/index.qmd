@@ -4,7 +4,12 @@ author: "Jiyuan Wang"
 date: "2026-09-22"
 ---
 
-## Load the data
+## Data
+
+The data comes from the
+[Iris dataset included in scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html).
+
+## Load and inspect the data
 
 ```{python}
 #| echo: true
@@ -18,17 +23,38 @@ df = iris.frame
 df.head()
 ```
 
+The dataset contains measurements of iris flowers, including sepal length,
+sepal width, petal length, and petal width.
+
+## Average measurements by species
+
 ```{python}
 #| echo: true
 
 df.groupby("target").mean()
 ```
 
+The three species have noticeably different average measurements.
+In particular, petal length and petal width increase substantially across
+the three target groups.
+
+## Compare petal length across species
+
 ```{python}
 #| echo: true
 
+df.groupby("target")["petal length (cm)"].agg(["mean", "min", "max"])
+```
+
+The target groups have clearly different ranges of petal length, suggesting
+that petal length may be useful for distinguishing between iris species.
+
+## Sepal length versus petal length
+
+```{python}
+#| echo: true
 #| label: fig-iris-scatter
-#| fig-cap: "Relationship between sepal length and petal length."
+#| fig-cap: "Relationship between sepal length and petal length in the Iris dataset."
 
 import matplotlib.pyplot as plt
 
@@ -41,3 +67,6 @@ plt.xlabel("Sepal length (cm)")
 plt.ylabel("Petal length (cm)")
 plt.show()
 ```
+
+The scatter plot shows a positive relationship between sepal length and
+petal length: flowers with longer sepals generally also have longer petals.
