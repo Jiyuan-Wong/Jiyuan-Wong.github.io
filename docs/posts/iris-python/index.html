@@ -8,6 +8,7 @@
 
 <meta name="author" content="Jiyuan Wang">
 <meta name="dcterms.date" content="2026-09-22">
+<meta name="description" content="An exploratory analysis of the Iris dataset using Python.">
 
 <title>Exploring the Iris Dataset using Python – Jiyuan Wang</title>
 <style>
@@ -166,8 +167,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a></li>
   <li><a href="#load-and-inspect-the-data" id="toc-load-and-inspect-the-data" class="nav-link" data-scroll-target="#load-and-inspect-the-data">Load and inspect the data</a></li>
   <li><a href="#average-measurements-by-species" id="toc-average-measurements-by-species" class="nav-link" data-scroll-target="#average-measurements-by-species">Average measurements by species</a></li>
-  <li><a href="#compare-petal-length-across-species" id="toc-compare-petal-length-across-species" class="nav-link" data-scroll-target="#compare-petal-length-across-species">Compare petal length across species</a></li>
-  <li><a href="#sepal-length-versus-petal-length" id="toc-sepal-length-versus-petal-length" class="nav-link" data-scroll-target="#sepal-length-versus-petal-length">Sepal length versus petal length</a></li>
+  <li><a href="#petal-length-distribution-by-species" id="toc-petal-length-distribution-by-species" class="nav-link" data-scroll-target="#petal-length-distribution-by-species">Petal length distribution by species</a></li>
+  <li><a href="#correlation-between-flower-measurements" id="toc-correlation-between-flower-measurements" class="nav-link" data-scroll-target="#correlation-between-flower-measurements">Correlation between flower measurements</a></li>
+  <li><a href="#number-of-flowers-by-species" id="toc-number-of-flowers-by-species" class="nav-link" data-scroll-target="#number-of-flowers-by-species">Number of flowers by species</a></li>
   </ul>
 </nav>
     </div>
@@ -179,6 +181,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 class="title">Exploring the Iris Dataset using Python</h1>
 </div>
 
+<div>
+  <div class="description">
+    An exploratory analysis of the Iris dataset using Python.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -208,17 +215,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
 <p>The data comes from the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html">Iris dataset included in scikit-learn</a>.</p>
+<p>The dataset contains measurements of 150 iris flowers from three species: Setosa, Versicolor, and Virginica.</p>
 </section>
 <section id="load-and-inspect-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="load-and-inspect-the-data">Load and inspect the data</h2>
-<div id="da186473" class="cell" data-execution_count="1">
+<div id="9a230f13" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_iris</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span> load_iris(as_frame<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> iris.frame</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span> load_iris(as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> iris.frame</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"species"</span>] <span class="op">=</span> df[<span class="st">"target"</span>].<span class="bu">map</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(<span class="bu">enumerate</span>(iris.target_names))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 
@@ -232,6 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th data-quarto-table-cell-role="th">petal length (cm)</th>
 <th data-quarto-table-cell-role="th">petal width (cm)</th>
 <th data-quarto-table-cell-role="th">target</th>
+<th data-quarto-table-cell-role="th">species</th>
 </tr>
 </thead>
 <tbody>
@@ -242,6 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>1.4</td>
 <td>0.2</td>
 <td>0</td>
+<td>setosa</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
@@ -250,6 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>1.4</td>
 <td>0.2</td>
 <td>0</td>
+<td>setosa</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
@@ -258,6 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>1.3</td>
 <td>0.2</td>
 <td>0</td>
+<td>setosa</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
@@ -266,6 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>1.5</td>
 <td>0.2</td>
 <td>0</td>
+<td>setosa</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
@@ -274,6 +292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>1.4</td>
 <td>0.2</td>
 <td>0</td>
+<td>setosa</td>
 </tr>
 </tbody>
 </table>
@@ -281,12 +300,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The dataset contains measurements of iris flowers, including sepal length, sepal width, petal length, and petal width.</p>
+<p>The dataset contains measurements of sepal length, sepal width, petal length, and petal width. I also created a <code>species</code> column so that the three flower species are easier to interpret than the numerical target values.</p>
 </section>
 <section id="average-measurements-by-species" class="level2">
 <h2 class="anchored" data-anchor-id="average-measurements-by-species">Average measurements by species</h2>
-<div id="2f39937f" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">"target"</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="4b2cab81" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">"species"</span>)[</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"sepal length (cm)"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"sepal width (cm)"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"petal length (cm)"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"petal width (cm)"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
@@ -301,7 +327,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th data-quarto-table-cell-role="th">petal width (cm)</th>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">target</th>
+<th data-quarto-table-cell-role="th">species</th>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th"></th>
@@ -310,21 +336,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
+<th data-quarto-table-cell-role="th">setosa</th>
 <td>5.006</td>
 <td>3.428</td>
 <td>1.462</td>
 <td>0.246</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
+<th data-quarto-table-cell-role="th">versicolor</th>
 <td>5.936</td>
 <td>2.770</td>
 <td>4.260</td>
 <td>1.326</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
+<th data-quarto-table-cell-role="th">virginica</th>
 <td>6.588</td>
 <td>2.974</td>
 <td>5.552</td>
@@ -336,13 +362,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The three species have noticeably different average measurements. In particular, petal length and petal width increase substantially across the three target groups.</p>
+<p>The average measurements differ across the three species. Setosa flowers have substantially shorter and narrower petals, while Virginica flowers generally have the largest petal measurements.</p>
 </section>
-<section id="compare-petal-length-across-species" class="level2">
-<h2 class="anchored" data-anchor-id="compare-petal-length-across-species">Compare petal length across species</h2>
-<div id="3f1f198f" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">"target"</span>)[<span class="st">"petal length (cm)"</span>].agg([<span class="st">"mean"</span>, <span class="st">"min"</span>, <span class="st">"max"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<section id="petal-length-distribution-by-species" class="level2">
+<h2 class="anchored" data-anchor-id="petal-length-distribution-by-species">Petal length distribution by species</h2>
+<div id="cell-fig-petal-boxplot" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.boxplot(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    column<span class="op">=</span><span class="st">"petal length (cm)"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    by<span class="op">=</span><span class="st">"species"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Species"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Petal length (cm)"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Petal Length by Species"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">""</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-petal-boxplot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-petal-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-petal-boxplot-output-1.png" width="594" height="441" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-petal-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Distribution of petal length for each Iris species.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The box plot shows clear differences in petal length among the three species. Setosa has much shorter petals, while Virginica generally has the longest petals.</p>
+</section>
+<section id="correlation-between-flower-measurements" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-between-flower-measurements">Correlation between flower measurements</h2>
+<p>Next, I examined how strongly the four numerical flower measurements are related to one another.</p>
+<div id="6761a5e2" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>measurement_columns <span class="op">=</span> [</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sepal length (cm)"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sepal width (cm)"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"petal length (cm)"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"petal width (cm)"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>correlations <span class="op">=</span> df[measurement_columns].corr()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>correlations.<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
@@ -350,35 +414,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">mean</th>
-<th data-quarto-table-cell-role="th">min</th>
-<th data-quarto-table-cell-role="th">max</th>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">target</th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sepal length (cm)</th>
+<th data-quarto-table-cell-role="th">sepal width (cm)</th>
+<th data-quarto-table-cell-role="th">petal length (cm)</th>
+<th data-quarto-table-cell-role="th">petal width (cm)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>1.462</td>
-<td>1.0</td>
-<td>1.9</td>
+<th data-quarto-table-cell-role="th">sepal length (cm)</th>
+<td>1.00</td>
+<td>-0.12</td>
+<td>0.87</td>
+<td>0.82</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>4.260</td>
-<td>3.0</td>
-<td>5.1</td>
+<th data-quarto-table-cell-role="th">sepal width (cm)</th>
+<td>-0.12</td>
+<td>1.00</td>
+<td>-0.43</td>
+<td>-0.37</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>5.552</td>
-<td>4.5</td>
-<td>6.9</td>
+<th data-quarto-table-cell-role="th">petal length (cm)</th>
+<td>0.87</td>
+<td>-0.43</td>
+<td>1.00</td>
+<td>0.96</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">petal width (cm)</th>
+<td>0.82</td>
+<td>-0.37</td>
+<td>0.96</td>
+<td>1.00</td>
 </tr>
 </tbody>
 </table>
@@ -386,35 +455,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The target groups have clearly different ranges of petal length, suggesting that petal length may be useful for distinguishing between iris species.</p>
+<p>Petal length and petal width have a strong positive relationship. Sepal length also tends to increase as petal length and petal width increase. Sepal width shows a different pattern and has weaker relationships with some of the other measurements.</p>
 </section>
-<section id="sepal-length-versus-petal-length" class="level2">
-<h2 class="anchored" data-anchor-id="sepal-length-versus-petal-length">Sepal length versus petal length</h2>
-<div id="cell-fig-iris-scatter" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"sepal length (cm)"</span>],</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"petal length (cm)"</span>]</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Sepal length (cm)"</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Petal length (cm)"</span>)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="number-of-flowers-by-species" class="level2">
+<h2 class="anchored" data-anchor-id="number-of-flowers-by-species">Number of flowers by species</h2>
+<p>Finally, I checked whether all three species have the same number of observations in the dataset.</p>
+<div id="cell-fig-species-count" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>species_counts <span class="op">=</span> df[<span class="st">"species"</span>].value_counts().sort_index()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>species_counts.plot(kind<span class="op">=</span><span class="st">"bar"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Species"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of observations"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Number of Flowers by Species"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-iris-scatter" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-species-count" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-iris-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-iris-scatter-output-1.png" width="577" height="431" class="figure-img">
+<div aria-describedby="fig-species-count-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-species-count-output-1.png" width="585" height="451" class="figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iris-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Relationship between sepal length and petal length in the Iris dataset.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-species-count-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Number of Iris observations for each species.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The scatter plot shows a positive relationship between sepal length and petal length: flowers with longer sepals generally also have longer petals.</p>
+<p>The bar chart shows that the dataset is balanced: each of the three Iris species has the same number of observations.</p>
 
 
 </section>

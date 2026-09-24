@@ -35,6 +35,27 @@
     "text": "Body mass distribution by species\n\npenguins |&gt;\n  drop_na(species, body_mass_g) |&gt;\n  ggplot(aes(x = species, y = body_mass_g)) +\n  geom_boxplot() +\n  labs(\n    x = \"Species\",\n    y = \"Body mass (g)\",\n    title = \"Penguin Body Mass by Species\"\n  )\n\n\n\n\n\n\n\nFigure 1: Distribution of body mass for each penguin species.\n\n\n\n\n\nThe boxplot shows that Gentoo penguins generally have a higher body mass than Adelie and Chinstrap penguins."
   },
   {
+    "objectID": "posts/penguins-r/index.html#flipper-length-and-body-mass",
+    "href": "posts/penguins-r/index.html#flipper-length-and-body-mass",
+    "title": "Exploring Palmer Penguins using R",
+    "section": "Flipper length and body mass",
+    "text": "Flipper length and body mass\nNext, I explored whether penguins with longer flippers also tend to have greater body mass.\n\npenguins |&gt;\n  drop_na(flipper_length_mm, body_mass_g, species) |&gt;\n  ggplot(\n    aes(\n      x = flipper_length_mm,\n      y = body_mass_g,\n      color = species\n    )\n  ) +\n  geom_point(alpha = 0.7) +\n  labs(\n    x = \"Flipper length (mm)\",\n    y = \"Body mass (g)\",\n    color = \"Species\",\n    title = \"Flipper Length vs Body Mass\"\n  )\n\n\n\n\n\n\n\nFigure 2: Relationship between flipper length and body mass by species.\n\n\n\n\n\nThe scatter plot shows a positive relationship between flipper length and body mass. Gentoo penguins tend to have both longer flippers and higher body mass than Adelie and Chinstrap penguins."
+  },
+  {
+    "objectID": "posts/penguins-r/index.html#average-flipper-length-by-species",
+    "href": "posts/penguins-r/index.html#average-flipper-length-by-species",
+    "title": "Exploring Palmer Penguins using R",
+    "section": "Average flipper length by species",
+    "text": "Average flipper length by species\nI also calculated the average flipper length for each species.\n\npenguins |&gt;\n  drop_na(species, flipper_length_mm) |&gt;\n  group_by(species) |&gt;\n  summarise(\n    mean_flipper_length = mean(flipper_length_mm),\n    median_flipper_length = median(flipper_length_mm),\n    n = n()\n  )\n\n# A tibble: 3 × 4\n  species   mean_flipper_length median_flipper_length     n\n  &lt;fct&gt;                   &lt;dbl&gt;                 &lt;dbl&gt; &lt;int&gt;\n1 Adelie                   190.                   190   151\n2 Chinstrap                196.                   196    68\n3 Gentoo                   217.                   216   123\n\n\nGentoo penguins have the largest average flipper length, while Adelie penguins generally have the shortest flippers."
+  },
+  {
+    "objectID": "posts/penguins-r/index.html#compare-average-flipper-length",
+    "href": "posts/penguins-r/index.html#compare-average-flipper-length",
+    "title": "Exploring Palmer Penguins using R",
+    "section": "Compare average flipper length",
+    "text": "Compare average flipper length\nThe differences in average flipper length can also be visualized with a bar chart.\n\npenguins |&gt;\n  drop_na(species, flipper_length_mm) |&gt;\n  group_by(species) |&gt;\n  summarise(\n    mean_flipper_length = mean(flipper_length_mm)\n  ) |&gt;\n  ggplot(\n    aes(\n      x = species,\n      y = mean_flipper_length,\n      fill = species\n    )\n  ) +\n  geom_col() +\n  labs(\n    x = \"Species\",\n    y = \"Average flipper length (mm)\",\n    title = \"Average Flipper Length by Species\"\n  ) +\n  guides(fill = \"none\")\n\n\n\n\n\n\n\nFigure 3: Average flipper length of each penguin species.\n\n\n\n\n\nThe bar chart confirms that Gentoo penguins have noticeably longer flippers on average than the other two species."
+  },
+  {
     "objectID": "posts/first-week/index.html",
     "href": "posts/first-week/index.html",
     "title": "First Week in MDS",
@@ -46,7 +67,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Exploring the Iris Dataset using Python\n\n\n\n\n\n\n\n\nSep 22, 2026\n\n\nJiyuan Wang\n\n\n\n\n\n\n\n\n\n\n\n\nExploring Palmer Penguins using R\n\n\nAn exploration of penguin body mass across species using R.\n\n\n\n\n\nSep 22, 2026\n\n\nJiyuan Wang\n\n\n\n\n\n\n\n\n\n\n\n\nFirst Week in MDS\n\n\n\n\n\n\n\n\nSep 8, 2026\n\n\nJiyuan Wang\n\n\n\n\n\nNo matching items"
+    "text": "Exploring the Iris Dataset using Python\n\n\nAn exploratory analysis of the Iris dataset using Python.\n\n\n\n\n\nSep 22, 2026\n\n\nJiyuan Wang\n\n\n\n\n\n\n\n\n\n\n\n\nExploring Palmer Penguins using R\n\n\nAn exploration of penguin body mass across species using R.\n\n\n\n\n\nSep 22, 2026\n\n\nJiyuan Wang\n\n\n\n\n\n\n\n\n\n\n\n\nFirst Week in MDS\n\n\n\n\n\n\n\n\nSep 8, 2026\n\n\nJiyuan Wang\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -88,41 +109,48 @@
     "href": "posts/iris-python/index.html",
     "title": "Exploring the Iris Dataset using Python",
     "section": "",
-    "text": "The data comes from the Iris dataset included in scikit-learn."
+    "text": "The data comes from the Iris dataset included in scikit-learn.\nThe dataset contains measurements of 150 iris flowers from three species: Setosa, Versicolor, and Virginica."
   },
   {
     "objectID": "posts/iris-python/index.html#data",
     "href": "posts/iris-python/index.html#data",
     "title": "Exploring the Iris Dataset using Python",
     "section": "",
-    "text": "The data comes from the Iris dataset included in scikit-learn."
+    "text": "The data comes from the Iris dataset included in scikit-learn.\nThe dataset contains measurements of 150 iris flowers from three species: Setosa, Versicolor, and Virginica."
   },
   {
     "objectID": "posts/iris-python/index.html#load-and-inspect-the-data",
     "href": "posts/iris-python/index.html#load-and-inspect-the-data",
     "title": "Exploring the Iris Dataset using Python",
     "section": "Load and inspect the data",
-    "text": "Load and inspect the data\n\nfrom sklearn.datasets import load_iris\nimport pandas as pd\n\niris = load_iris(as_frame=True)\ndf = iris.frame\n\ndf.head()\n\n\n\n\n\n\n\n\nsepal length (cm)\nsepal width (cm)\npetal length (cm)\npetal width (cm)\ntarget\n\n\n\n\n0\n5.1\n3.5\n1.4\n0.2\n0\n\n\n1\n4.9\n3.0\n1.4\n0.2\n0\n\n\n2\n4.7\n3.2\n1.3\n0.2\n0\n\n\n3\n4.6\n3.1\n1.5\n0.2\n0\n\n\n4\n5.0\n3.6\n1.4\n0.2\n0\n\n\n\n\n\n\n\nThe dataset contains measurements of iris flowers, including sepal length, sepal width, petal length, and petal width."
+    "text": "Load and inspect the data\n\nfrom sklearn.datasets import load_iris\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\niris = load_iris(as_frame=True)\ndf = iris.frame\n\ndf[\"species\"] = df[\"target\"].map(\n    dict(enumerate(iris.target_names))\n)\n\ndf.head()\n\n\n\n\n\n\n\n\nsepal length (cm)\nsepal width (cm)\npetal length (cm)\npetal width (cm)\ntarget\nspecies\n\n\n\n\n0\n5.1\n3.5\n1.4\n0.2\n0\nsetosa\n\n\n1\n4.9\n3.0\n1.4\n0.2\n0\nsetosa\n\n\n2\n4.7\n3.2\n1.3\n0.2\n0\nsetosa\n\n\n3\n4.6\n3.1\n1.5\n0.2\n0\nsetosa\n\n\n4\n5.0\n3.6\n1.4\n0.2\n0\nsetosa\n\n\n\n\n\n\n\nThe dataset contains measurements of sepal length, sepal width, petal length, and petal width. I also created a species column so that the three flower species are easier to interpret than the numerical target values."
   },
   {
     "objectID": "posts/iris-python/index.html#average-measurements-by-species",
     "href": "posts/iris-python/index.html#average-measurements-by-species",
     "title": "Exploring the Iris Dataset using Python",
     "section": "Average measurements by species",
-    "text": "Average measurements by species\n\ndf.groupby(\"target\").mean()\n\n\n\n\n\n\n\n\nsepal length (cm)\nsepal width (cm)\npetal length (cm)\npetal width (cm)\n\n\ntarget\n\n\n\n\n\n\n\n\n0\n5.006\n3.428\n1.462\n0.246\n\n\n1\n5.936\n2.770\n4.260\n1.326\n\n\n2\n6.588\n2.974\n5.552\n2.026\n\n\n\n\n\n\n\nThe three species have noticeably different average measurements. In particular, petal length and petal width increase substantially across the three target groups."
+    "text": "Average measurements by species\n\ndf.groupby(\"species\")[\n    [\n        \"sepal length (cm)\",\n        \"sepal width (cm)\",\n        \"petal length (cm)\",\n        \"petal width (cm)\"\n    ]\n].mean()\n\n\n\n\n\n\n\n\nsepal length (cm)\nsepal width (cm)\npetal length (cm)\npetal width (cm)\n\n\nspecies\n\n\n\n\n\n\n\n\nsetosa\n5.006\n3.428\n1.462\n0.246\n\n\nversicolor\n5.936\n2.770\n4.260\n1.326\n\n\nvirginica\n6.588\n2.974\n5.552\n2.026\n\n\n\n\n\n\n\nThe average measurements differ across the three species. Setosa flowers have substantially shorter and narrower petals, while Virginica flowers generally have the largest petal measurements."
   },
   {
-    "objectID": "posts/iris-python/index.html#compare-petal-length-across-species",
-    "href": "posts/iris-python/index.html#compare-petal-length-across-species",
+    "objectID": "posts/iris-python/index.html#petal-length-distribution-by-species",
+    "href": "posts/iris-python/index.html#petal-length-distribution-by-species",
     "title": "Exploring the Iris Dataset using Python",
-    "section": "Compare petal length across species",
-    "text": "Compare petal length across species\n\ndf.groupby(\"target\")[\"petal length (cm)\"].agg([\"mean\", \"min\", \"max\"])\n\n\n\n\n\n\n\n\nmean\nmin\nmax\n\n\ntarget\n\n\n\n\n\n\n\n0\n1.462\n1.0\n1.9\n\n\n1\n4.260\n3.0\n5.1\n\n\n2\n5.552\n4.5\n6.9\n\n\n\n\n\n\n\nThe target groups have clearly different ranges of petal length, suggesting that petal length may be useful for distinguishing between iris species."
+    "section": "Petal length distribution by species",
+    "text": "Petal length distribution by species\n\ndf.boxplot(\n    column=\"petal length (cm)\",\n    by=\"species\"\n)\n\nplt.xlabel(\"Species\")\nplt.ylabel(\"Petal length (cm)\")\nplt.title(\"Petal Length by Species\")\nplt.suptitle(\"\")\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Distribution of petal length for each Iris species.\n\n\n\n\n\nThe box plot shows clear differences in petal length among the three species. Setosa has much shorter petals, while Virginica generally has the longest petals."
   },
   {
-    "objectID": "posts/iris-python/index.html#sepal-length-versus-petal-length",
-    "href": "posts/iris-python/index.html#sepal-length-versus-petal-length",
+    "objectID": "posts/iris-python/index.html#correlation-between-flower-measurements",
+    "href": "posts/iris-python/index.html#correlation-between-flower-measurements",
     "title": "Exploring the Iris Dataset using Python",
-    "section": "Sepal length versus petal length",
-    "text": "Sepal length versus petal length\n\nimport matplotlib.pyplot as plt\n\nplt.scatter(\n    df[\"sepal length (cm)\"],\n    df[\"petal length (cm)\"]\n)\n\nplt.xlabel(\"Sepal length (cm)\")\nplt.ylabel(\"Petal length (cm)\")\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Relationship between sepal length and petal length in the Iris dataset.\n\n\n\n\n\nThe scatter plot shows a positive relationship between sepal length and petal length: flowers with longer sepals generally also have longer petals."
+    "section": "Correlation between flower measurements",
+    "text": "Correlation between flower measurements\nNext, I examined how strongly the four numerical flower measurements are related to one another.\n\nmeasurement_columns = [\n    \"sepal length (cm)\",\n    \"sepal width (cm)\",\n    \"petal length (cm)\",\n    \"petal width (cm)\"\n]\n\ncorrelations = df[measurement_columns].corr()\n\ncorrelations.round(2)\n\n\n\n\n\n\n\n\nsepal length (cm)\nsepal width (cm)\npetal length (cm)\npetal width (cm)\n\n\n\n\nsepal length (cm)\n1.00\n-0.12\n0.87\n0.82\n\n\nsepal width (cm)\n-0.12\n1.00\n-0.43\n-0.37\n\n\npetal length (cm)\n0.87\n-0.43\n1.00\n0.96\n\n\npetal width (cm)\n0.82\n-0.37\n0.96\n1.00\n\n\n\n\n\n\n\nPetal length and petal width have a strong positive relationship. Sepal length also tends to increase as petal length and petal width increase. Sepal width shows a different pattern and has weaker relationships with some of the other measurements."
+  },
+  {
+    "objectID": "posts/iris-python/index.html#number-of-flowers-by-species",
+    "href": "posts/iris-python/index.html#number-of-flowers-by-species",
+    "title": "Exploring the Iris Dataset using Python",
+    "section": "Number of flowers by species",
+    "text": "Number of flowers by species\nFinally, I checked whether all three species have the same number of observations in the dataset.\n\nspecies_counts = df[\"species\"].value_counts().sort_index()\n\nspecies_counts.plot(kind=\"bar\")\n\nplt.xlabel(\"Species\")\nplt.ylabel(\"Number of observations\")\nplt.title(\"Number of Flowers by Species\")\nplt.xticks(rotation=0)\nplt.show()\n\n\n\n\n\n\n\nFigure 2: Number of Iris observations for each species.\n\n\n\n\n\nThe bar chart shows that the dataset is balanced: each of the three Iris species has the same number of observations."
   }
 ]

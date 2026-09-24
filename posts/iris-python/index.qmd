@@ -2,12 +2,16 @@
 title: "Exploring the Iris Dataset using Python"
 author: "Jiyuan Wang"
 date: "2026-09-22"
+description: "An exploratory analysis of the Iris dataset using Python."
 ---
 
 ## Data
 
 The data comes from the
 [Iris dataset included in scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html).
+
+The dataset contains measurements of 150 iris flowers from three species:
+Setosa, Versicolor, and Virginica.
 
 ## Load and inspect the data
 
@@ -16,57 +20,110 @@ The data comes from the
 
 from sklearn.datasets import load_iris
 import pandas as pd
+import matplotlib.pyplot as plt
 
 iris = load_iris(as_frame=True)
 df = iris.frame
 
+df["species"] = df["target"].map(
+    dict(enumerate(iris.target_names))
+)
+
 df.head()
 ```
 
-The dataset contains measurements of iris flowers, including sepal length,
-sepal width, petal length, and petal width.
+The dataset contains measurements of sepal length, sepal width, petal
+length, and petal width. I also created a `species` column so that the
+three flower species are easier to interpret than the numerical target
+values.
 
 ## Average measurements by species
 
 ```{python}
 #| echo: true
 
-df.groupby("target").mean()
+df.groupby("species")[
+    [
+        "sepal length (cm)",
+        "sepal width (cm)",
+        "petal length (cm)",
+        "petal width (cm)"
+    ]
+].mean()
 ```
 
-The three species have noticeably different average measurements.
-In particular, petal length and petal width increase substantially across
-the three target groups.
+The average measurements differ across the three species. Setosa flowers
+have substantially shorter and narrower petals, while Virginica flowers
+generally have the largest petal measurements.
 
-## Compare petal length across species
+## Petal length distribution by species
 
 ```{python}
 #| echo: true
+#| label: fig-petal-boxplot
+#| fig-cap: "Distribution of petal length for each Iris species."
 
-df.groupby("target")["petal length (cm)"].agg(["mean", "min", "max"])
-```
-
-The target groups have clearly different ranges of petal length, suggesting
-that petal length may be useful for distinguishing between iris species.
-
-## Sepal length versus petal length
-
-```{python}
-#| echo: true
-#| label: fig-iris-scatter
-#| fig-cap: "Relationship between sepal length and petal length in the Iris dataset."
-
-import matplotlib.pyplot as plt
-
-plt.scatter(
-    df["sepal length (cm)"],
-    df["petal length (cm)"]
+df.boxplot(
+    column="petal length (cm)",
+    by="species"
 )
 
-plt.xlabel("Sepal length (cm)")
+plt.xlabel("Species")
 plt.ylabel("Petal length (cm)")
+plt.title("Petal Length by Species")
+plt.suptitle("")
 plt.show()
 ```
 
-The scatter plot shows a positive relationship between sepal length and
-petal length: flowers with longer sepals generally also have longer petals.
+The box plot shows clear differences in petal length among the three
+species. Setosa has much shorter petals, while Virginica generally has
+the longest petals.
+
+## Correlation between flower measurements
+
+Next, I examined how strongly the four numerical flower measurements are
+related to one another.
+
+```{python}
+#| echo: true
+
+measurement_columns = [
+    "sepal length (cm)",
+    "sepal width (cm)",
+    "petal length (cm)",
+    "petal width (cm)"
+]
+
+correlations = df[measurement_columns].corr()
+
+correlations.round(2)
+```
+
+Petal length and petal width have a strong positive relationship. Sepal
+length also tends to increase as petal length and petal width increase.
+Sepal width shows a different pattern and has weaker relationships with
+some of the other measurements.
+
+## Number of flowers by species
+
+Finally, I checked whether all three species have the same number of
+observations in the dataset.
+
+```{python}
+#| echo: true
+#| label: fig-species-count
+#| fig-cap: "Number of Iris observations for each species."
+
+species_counts = df["species"].value_counts().sort_index()
+
+species_counts.plot(kind="bar")
+
+plt.xlabel("Species")
+plt.ylabel("Number of observations")
+plt.title("Number of Flowers by Species")
+plt.xticks(rotation=0)
+plt.show()
+```
+
+The bar chart shows that the dataset is balanced: each of the three Iris
+species has the same number of observations.

@@ -56,3 +56,86 @@ penguins |>
 ```
 
 The boxplot shows that Gentoo penguins generally have a higher body mass than Adelie and Chinstrap penguins.
+
+## Flipper length and body mass
+
+Next, I explored whether penguins with longer flippers also tend to have greater body mass.
+
+```{r}
+#| echo: true
+#| label: fig-flipper-mass
+#| fig-cap: "Relationship between flipper length and body mass by species."
+
+penguins |>
+  drop_na(flipper_length_mm, body_mass_g, species) |>
+  ggplot(
+    aes(
+      x = flipper_length_mm,
+      y = body_mass_g,
+      color = species
+    )
+  ) +
+  geom_point(alpha = 0.7) +
+  labs(
+    x = "Flipper length (mm)",
+    y = "Body mass (g)",
+    color = "Species",
+    title = "Flipper Length vs Body Mass"
+  )
+```
+
+The scatter plot shows a positive relationship between flipper length and body mass. Gentoo penguins tend to have both longer flippers and higher body mass than Adelie and Chinstrap penguins.
+
+
+## Average flipper length by species
+
+I also calculated the average flipper length for each species.
+
+```{r}
+#| echo: true
+
+penguins |>
+  drop_na(species, flipper_length_mm) |>
+  group_by(species) |>
+  summarise(
+    mean_flipper_length = mean(flipper_length_mm),
+    median_flipper_length = median(flipper_length_mm),
+    n = n()
+  )
+```
+
+Gentoo penguins have the largest average flipper length, while Adelie penguins generally have the shortest flippers.
+
+
+## Compare average flipper length
+
+The differences in average flipper length can also be visualized with a bar chart.
+
+```{r}
+#| echo: true
+#| label: fig-average-flipper
+#| fig-cap: "Average flipper length of each penguin species."
+
+penguins |>
+  drop_na(species, flipper_length_mm) |>
+  group_by(species) |>
+  summarise(
+    mean_flipper_length = mean(flipper_length_mm)
+  ) |>
+  ggplot(
+    aes(
+      x = species,
+      y = mean_flipper_length,
+      fill = species
+    )
+  ) +
+  geom_col() +
+  labs(
+    x = "Species",
+    y = "Average flipper length (mm)",
+    title = "Average Flipper Length by Species"
+  ) +
+  guides(fill = "none")
+```
+
+The bar chart confirms that Gentoo penguins have noticeably longer flippers on average than the other two species.
